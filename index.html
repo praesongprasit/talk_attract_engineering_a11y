@@ -2,7 +2,7 @@
 <html lang="en-NZ">
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
 		<link rel="icon" type="image/png" href="img/icons/favicon-96x96.png" sizes="96x96">
@@ -18,140 +18,372 @@
 		<meta name="theme-color" content="#A2DDD9"/>
 		<meta name="background-color" content="#fff"/>
 
-		<meta property="og:url" content="https://praesongprasit.github.io/talk_get-devs-into-UX-journey/" />
+		<meta property="og:url" content="https://praesongprasit.github.io/talk_react-told-me-off/" />
 		<meta property="og:type" content="article">
 
-		<meta property="og:image" name="twitter:image" content="https://praesongprasit.github.io/talk_get-devs-into-UX-journey/repository-open-graph_img.png" />
-		<meta property="og:image:alt" content="Web Access Club logo, written in dark teal serif font, with light sea spray background."/>
+		<meta property="og:image" name="twitter:image" content="https://praesongprasit.github.io/talk_react-told-me-off/repository-open-graph_img.png" />
+		<meta property="og:image:alt" content="Light text on dark green background which said, Entice 'em, getting engineers excited about accessibility @PraeSongprasit"/>
 		<meta property="og:image:type" content="image/png"/>
 		<meta property="og:image:width" content="1280"/>
 		<meta property="og:image:height" content="640"/>
 
-		<meta property="og:title" name="twitter:title" content="Including developers in the User Experience journey" />
-		<meta property="og:description" name="twitter:description" content="How do we go about it?" />
+		<meta property="og:title" name="twitter:title" content="Entice 'em, getting engineers excited about accessibility" />
+		<meta property="og:description" name="twitter:description" content="I'm an engineer who cares about HTML output. I still make mistakes. Often, front-end frameworks like React and Angular abstract HTML away. Even more so with design systems built on these frameworks. It's easy to forget to scrutinise the output during implementation. The good news is, these frameworks are aware of the problem, and are constantly getting better at catching low-hanging fruit.
+Let me show you a few ways React and React Testing Library told me off!" />
 
 		<meta name="twitter:card" content="summary_large_image">
 		<meta name="twitter:dnt" content="on">
 		<meta name="twitter:creator" content="@PraeSongprasit">
 
-		<title>Including Developers in the User Experience Journey - Prae Songprasit</title>
+		<title>Entice 'em - Getting engineers excited about accessibility by Prae Songprasit</title>
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
 		<link rel="stylesheet" href="dist/theme/personal-branding.css" id="theme">
 
 		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="plugin/highlight/a11y-dark.css" id="highlight-theme">
 	</head>
 	<body>
 		<div class="reveal">
 			<main class="slides">
 				<section>
-					<h1>Title</h1>
-					<p>Subtitle</p>
+					<h1>Entice 'em</h1>
+					<p>Getting engineers<br> excited about accessibility</p>
 					<p class="small-text">
-						<a href="https://twitter.com/PraeSongprasit" alt="Link to Prae Songprasit's twitter">@PraeSongprasit</a>
+						<a rel="external" href="https://twitter.com/PraeSongprasit" alt="Link to Prae Songprasit's twitter">@PraeSongprasit</a> and 
+						<a rel="external" href="https://twitter.com/PraeSongprasit" alt="Web Access Club podcast twitter">@WebAccessClub</a>
 					</p>
 
 					<aside class="notes">
-						<p>Prae, UI Front End Developer for 7 years.</p>
-						<p>Specialise in scalable CSS &amp; Semantic HTML for large scale sites.</p>
-						<p>Like Tourism New Zealand, and Xero's customer help portal.</p>
-						<p>To keep things concise, I'm going to refer to Developers 'Dev'.</p>
-						<p>UX researcher? Designer? Devs in the room?</p>
+						<p>Hi, I'm Prae, a Thai woman with shoulder length dark hair. I’m wearing a large pair of dark full-frame glasses and [cloths]</p>
+						<p>And I'm here to explain how React told me off, for writting inaccessible code.</p>
+						<p>I'm a software engineer who cares about HTML output, and host of the Web Access Club podcast.</p>
 					</aside>
 				</section>
 
 				<section>
-					<h2>Why?</h2>
+					<img
+							width="80%"
+							src="img/static_site_graphic.png"
+							alt="Wireframe of a website, with icon and navigation at the top, hero image, then text content">
 
+					<aside class="notes">
+						<p>I started my career in web as a junior designer.</p>
+						<p>Within the first month, I realised that I didn't enjoy designing, but I sure enjoyed coding up people's designs with HTML and CSS. So I've been a front-end person ever since.</p>
+						<p>I love creating responsive designs and improving usability of designs through code. I was mainly working on large information heavy sites for many years, so using HTML, CSS and a little touch of JavaScript was enough.</p>
+						<p>That is how I've managed to avoid learning to code in modern JavaScript frameworks like React for most of my career.</p>
+						<p>Majority of my previous projects focused on templating informative pages (like tourism websites), my testing knowledge only extends to manual multi-device regression testing, and network throttling in the browser to check site performance.</p>
+						<p>Since my code is usually concerned with visuals, in a fixed budget fast-pace agency environment, I didn't know, or needed to know how to write tests for my front-end code.</p>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Why test code?</h2>
 					<p>
-						<span class="fragment" data-fragment-index="1">Create <bold>empathy</bold></span>
-						<span class="fragment" data-fragment-index="2">and add <bold>context</bold></span>
+						Reduce errors on complex interactive sites
 					</p>
 
 					<aside class="notes">
-						<p>UX spend all the time empathising with customers, yet not to their own devs</p>
-						<p>Last job, I worked in a service design agency. Seen difference when devs were and were not involved early</p>
-						<p>As a dev, I've grown. Changed the way I approach a problem</p>
-						<p>Once we've experienced this, if done right, the benefit is undeniable</p>
-						<p>Lately feels far away from my users. Given task, and no real user context</p>
+						<p>This all changed, when I joined a team who works on a highly interactive web app, which was coded using React JavaScript framework.</p>
+						<p>It was also when my job title changed from a developer to an engineer.</p>
+						<p>Wow that was imposter syndrome inducing. I'm now expected to be able to 'engineer' websites, rather than simply 'develop' them.</p>
+						<p>Suddenly, I'm not just making content available on a static page for my users.</p>
+						<p>I'm providing users with different kinds of interactive elements, which let users do a lot more complex things on the page.</p>
+						<p>So I have to learn to write tests to prevent and spot errors before customers sees it.</p>
 					</aside>
 				</section>
 
 				<section>
-					<h2>When?</h2>
+					<img
+							width="70%"
+							src="img/todo_graphic.png"
+							alt="Simplified UI of 4 to-do list states, empty, with an item added, done, and archived">
+
+					<aside class="notes">
+						<p>Think of to-do apps. It looks simple, a list title with lists of items.</p>
+						<p>But there's a lot more to it than you think. I have to allow users to add whatever text they want as a dismissable list item.</p>
+						<p>There's logic to control when a list item should be displayed, when it should appear in the 'done' or an 'archived' state, and when it should be permanently deleted. </p>
+						<p>With so much microinteraction and power in the hands of my users, a lot more code could go wrong here. </p>
+						<p>If I didn't code the list logic properly, archiving a list item could permanently delete that item by accident.</p>
+						<p>And what happens, if someone uses a special character?</p>
+						<p>Many JavaScript frameworks like React are designed, so that this sort of complex logic can be done in the browser, without forcing the users to refresh their browser. </p>
+						<p>In the early days of the web, most logic that deals with content happens in the server, not the browser. </p>
+						<p>So back-end developers who often use traditional imperative programming languages are expected to write tests, to ensure that the logic works as expected under different scenarios. It's good code quality control and development practice.</p>
+						<p>But writing logical tests for front-end web interfaces is a much newer concept, especially for me. </p>
+						<p>The first unit testing tool I've ever used was the React version of the open source library, called the 'Testing Library'.</p>
+					</aside>
+				</section>
+
+				<section>
+					<h2>React <br>Testing Library</h2>
+					<p>Enforce user centric tests</p>
+
+					<aside class="notes">
+						<p>This testing library can be added to many front-end frameworks.</p>
+						<p>But since I'm working with React, I only know how to use it with React at the moment.</p>
+						<p>The Testing Library helps me test UI components in a user-centric way, like the way a user would use a component.</p>
+					</aside>
+				</section>
+
+				<section>
+					<pre>
+						<code data-trim data-noescape class="language-html">
+							&lt;Button
+								label="Add a new fish"
+								onClick="this.showFishInput"
+							/&gt;
+							
+							&lt;Input
+								aria-label="Fish name"
+								class="fishInput"
+							/&gt;
+							<span class="fragment">
+							fireEvent.showFishInput()
+
+							expect(&lt;Input class="fishInput"/&gt;) to render 🤯
+							</span>
+						</code>
+					</pre>
+
+					<aside class="notes">
+						<p>For example, I was tasked to write tests for a button that would show an input field.</p>
+						<p>On the screen, you can see React Button markup, with label 'add a new fish' and an onClick handler, <br>which will run showFishInput that renders </p>
+						<p>Below the button, is input code it suppose to render.</p>
+						<p>The input field was marked up with aria-label 'Fish name', and class called 'fishInput'.</p>
+						<p>A note that in this example, the function's syntax isn't entirely accurate, <br>and Input field doesn't have a visible label... and used aria-label.... I've only done that to simplified the slide.</p>
+						<p>Please get correct syntax from docs, <br>and add a visible label then link it to input using for and ID attribute instead!!</p>
+						<hr>
+						<p>Anyway...</p>
+						<p>In the past, the back-end style of writing tests, would focus on testing the function and implementation itself. In this case, the test would:</p>
+						<p>Fire event called showFishInput, and expect an input with class called 'fishInput' to render</p>
+						<p>The problem I have with this, is that it only tests if the input field with a class name "fishInput" appears on the page when that code is executed. The test doesn't care if there's an accessible name called "Fish name" attached to that newly rendered input field.</p>
+						<p>That's not how users think about this interface.</p>
+						<p>Users don't care about a classname? CSS classes are not visible to users on the page; their screen reader won't read it, and voice dictation tools can't find an element using CSS class.</p>
+						<p>This, is how you'd write it in React Testing Library</p>
+					</aside>
+				</section>
+
+				<section>
+					<pre>
+						<code data-trim data-noescape class="language-html">
+							&lt;Button
+								label="Add a new fish"
+								onClick="this.showFishInput"
+							/&gt;
+							
+							&lt;Input
+								aria-label="Fish name"
+								class="fishInput"
+							/&gt;
+							
+							userEvent.click(screen.getByText('Add a new fish'));
+
+							expect(
+								screen.getByRole('input', { name: 'Fish name' })
+							).toBeInTheDocument(); ❤️
+						</code>
+					</pre>
+
+					<aside class="notes">
+						<p>userEvent "Add a new fish" was clicked.</p>
+						<p>The test expect an input field with an accessible name called "Fish name" to appear.</p>
+						<p>React Testing Library is accessibility-first like that.</p>
+						<p>It encourages engineers to write tests that queries accessible names and DOM roles, rather than arbitrary IDs and Classes that users don't care about.</p>
+						<p>In this example, I used getByRole to find the input field.</p>
+						<p>But you can query or find things in the DOM by other useful static things like ByTitle, ByAltText, ByDisplayValue, even interactive states like pressed, checked, selected.</p>
+						<p>This is fantastic, because if the test cannot access those values, then something is seriously inaccessible about your code.</p>
+						<p>I once spotted an issue, where a hidden attribute accidentally remained attached to a component that should be displaying.</p>
+						<p>The query told me there's a problem because it couldn't find this hidden text.</p>
+					</aside>
+				</section>
+
+				<section>
+					<img
+							width="80%"
+							src="img/design_system_select_vs_dropdown.png"
+							alt="Simplified UI of 2 identical looking interactive elements, which could be a select box or a dropdown. One element's accessible name is Fish habitat, fresh water. Another element's name is Fish habitat.">
 					
-					<img class="stretch"
-							src="img/ux-ui-flow.png"
-							alt="UX-UI flow by Fen https://medium.com/nyc-design/ux-ui-design-process-for-beginner-753952bb2241">
-
 					<aside class="notes">
-						<p>How early should devs be involved? Depends</p>
-						<p>What kind of project? Is it a technical solution? Or is it a brochureware site?</p>
-						<p>Problem statements can be shared early</p>
-						<p>User research sessions can have devs join in</p>
-						<p>Data intensive projects can benefit from Dev wireframing. Yes UXers can do it with Axure, but devs don't have time to think about data models</p>
+						<p>What prompted me to write this talk, was when React Testing Library once helped me spotted that we used the wrong component from our design system.</p>
+						<p>On the screen, I've put up UI of 2 identical looking interactive elements, <br>it could be a select box or a dropdown.</p>
+						<p>My team needed a dropdown UI, so we quickly picked up one that seems easiest to implement.</p>
+						<p>In this example, the dropdown UI had a visible label called fish habitat, that shouldn't change.</p>
+						<p>We wrote the test to select an option to display information related to that habitat. In this case, 'fresh water'</p>
+						<p>We found out that the dropdown's accesible name after we selected 'fresh water', was 'fish habitat, fresh water'</p>
+						<p>We were very confused. Why is did the accessible name changed when something was selected?</p>
+						<p>We tested with a screen reader, and it announced the same thing!</p>
 					</aside>
 				</section>
 
 				<section>
-					<h2>How?</h2>
-
-					<ul>
-						<li class="fragment" data-fragment-index="1">Ask</li>
-						<li class="fragment" data-fragment-index="2">Align test session with appropriate dev</li>
-						<li class="fragment" data-fragment-index="3">Roster devs</li>
-						<li class="fragment" data-fragment-index="4">Turn them into observers and/or note taker</li>
-						<li class="fragment" data-fragment-index="5">Share findings with the team</li>
-					</ul>
-
+					<img
+							width="80%"
+							src="img/design_system_select_vs_dropdown_correct.png"
+							alt="Simplified UI of 2 identical looking interactive elements. The first element, which is a select input, has a visible label called Fish Habitat, showing that Fresh water option was selected. Its accessible name is Fish habitat, Fresh water. Another element is a custom dropdown menu with both visible and accessible name of Fish habitat.">
+					
 					<aside class="notes">
-						<p>A lot of what I taked about means double budget (dev + design) early, which pays off</p>
-						<p>Some devs, especially BEDs, see no point in this. FEDs are often on board</p>
-						<p>When companies first try, they make devs sit in every testing session, both user and usability test. Pointless, deminishing return</p>
-						<p>Data heavy prototype, get devs to sit in first session, fix, and followup</p>
-						<p>Final synthesised findings give devs idea of how decisions are reached, important to them and not</p>
+						<p>Turns out, the problem was that we used a select component, instead of a dropdown menu.</p>
+						<p>Select is a type of input field. It was originally designed for form submissions.</p>
+						<p>Usually, a select input field would have a visible label.</p>
+						<p>Once an option was selected, the screen reader would read both label and value. Just like any other input fields that was properly related to a label.</p>
+						<hr>
+						<p>My team saw that the design system component came with an option to hide visible label. The design didn't have one above the trigger, so we enabled that</p>
+						<p>Our design sytem team realised that a select input will only annouce the value of 'fresh water' without any context to screen reader users.</p>
+						<p>So they tried to be helpful and sets aria-label for the select input as label, and value. Hence the Fresh habitat and fresh water annoucement</p>
+						<hr>
+						<p>We should have used the dropdown menu component,<br>that was designed to be just a menu of repeatable activities people could do on a page, hence no need to annouce what's selected</p>
+						<p>The dropdown accessible name never change.</p>
+						<p>Thanks to React Testing Library, it nudge us to reimplement the feature with the right component.</p>
 					</aside>
 				</section>
 
 				<section>
-					<h2>Why not simply share finding?</h2>
-					<p class="fragment" data-fragment-index="1">It's an investment in your developers, and the team</p>
+					<h2>What about React?</h2>
+					<p>Improved docs, <br>development assistance, &amp; bundling</p>
 
 					<aside class="notes">
-						<p>Only sharing findings is like telling GoT beginning, and explain the ending</p>
-						<p>A dev who see users right click, will remember to markup links correctly</p>
-						<p>Small dev decisions are made without UX knowing. Database structure, allow scroll in iOS, how iframe gets put together and etc.</p>
-						<p>A dev who have witness his/her take 10 seconds to load during a session, is more likely to be on board with performance projects</p>
-						<p>Remind eachother of the experiences we've shared</p>
+						<p>I talked quite a bit about the React version of Testing Library.</p>
+						<p>But as the name suggests, it's a library. Something designed to be used in conjunction with a framework. It's not React itself.</p>
+						<p>So what does React itself actually do to help nudge engineers to write more accessible code?</p>
+						<p>It ries to improve its docs, and recommend more development assistance, &amp; bundle those recommendations in their starter kit.</p>
+						<hr>
+						<p>With documentation,</p>
+						<p>React understand that beginners copy and paste code quite blindly when learning.</p>
+						<p>So their copy-paste examples all throughout their docs are getting better, and more accessibility conscious all the time.</p>
+						<p>That is of course, human intervention. Requires reading. What about machine intervention?</p>
+						<p>Well, is to recommend basic development assistance</p>
+						<hr>
 					</aside>
 				</section>
 
 				<section>
-					<h2>UX is a journey</h2>
+					<pre>
+						<code data-trim data-noescape class="language-html">
+							&lt;img src="fishyImage.png"/&gt;
+
+							(image-alt):
+							Ensures &lt;img&gt; elements have alternate text
+							or a role of none or presentation
+
+
+							&lt;button tabindex="2"&gt;
+								Add a new fish
+							&lt;/button&gt;
+
+							(tabindex):
+							Ensures tabindex attribute values
+							are not greater than 0
+						</code>
+					</pre>
+
+					<aside class="notes">
+						<p>Everyone makes mistakes. Whenever possible, let tools instead of people tell them off.</p>
+						<p>There are some basic accessibility linting tools like axe-linter or eslint-plugin-jsx-a11y.</p>
+						<p>It would highlight an HTML attribute that isn't right, or is missing for a specific type of element with a red squiggly line like when you made a typo, and would show warnings in the console.</p>
+						<p>The example on the screen, shows linting messages for image and a button called Add a new fish with tabindex 2.</p>
+						<p>The linting message said:</p>
+						<p>that the image needed an alternative text or a role of non or presentation</p>
+						<p>For the button, it said that tabindex value should be no greater than 0.</p>
+						<p>This is a great way to remind engineers basic things while they're coding.</p>
+						<p>The last thing React did, was to recommend good practices in Create React App starter guide</p>
+					</aside>
+				</section>
+
+				<section>
+					<p>Create React App</p>
+					<img
+							width="40%"
+							src="img/create-react-app.svg"
+							alt="Create React App logo">
+
+					<aside class="notes">
+						<p>Create React App's is a bootstrap kit for starting a new React project.</p>
+						<p>React understand that it's crucial to add best practices to starter kits, because that's usually how someone create their first React project.</p>
+						<p>React Testing Library and the linting tools mentioned before, were also recommended in Create React App guides, along with other accessibility best practices</p>
+					</aside>
+				</section>
+
+				<section>
+					<h2>People can <br>ignore tests?!</h2>
 					<p class="fragment" data-fragment-index="1">
-						Best experience for developers <br>
-						=<br>
-						Best experience for users</p>
-				</section>
-
-				<section>
-					<h2>What next?</h2>
-					<p class="fragment" data-fragment-index="1">
-						UXer, go talk to your devs <br>
-						Devs, ask to be involved
+						Yes... but you can make it harder
 					</p>
 					<aside class="notes">
-						<p>Homework!</p>
-						<p>UXer, find a dev. Dev, find UXer. Now talk about how you'd like to work with eachother</p>
-						<p>We've turned UI into UX Designers through involvement in research. Lets Devs into UX Devs too</p>
+						<p>But wait… this is real life. Can't people also just ignore or by-pass these tests?</p>
+						<p>[Next]</p>
+						<p>Yes, and no. Depends.</p>
+						<p>For React Testing Library, if you don't write any tests as a part of your usual development process, then of course you won't reap these benefits.</p>
 					</aside>
 				</section>
 
 				<section>
-					<h2>Title</h2>
-					<p>Tweet me <a href="https://twitter.com/PraeSongprasit" alt="Link to Prae Songprasit's twitter">@PraeSongprasit</a></p>
+					<h2>Bake it in</h2>
+					<p>
+						TDD, prevent commits &amp; stop deploys
+					</p>
+					<aside class="notes">
+						<p>But if your team does test driven development, where you write tests first, then write real code which would fix the test, then React Testing Library will slot right into your workflow </p>
+						<p>As for development assistance like linting… You <em>can</em> turn some linting tools off, like additional libraries or extensions attached to your code editor. And frustratingly, many engineers unfamiliar with front-end landscape do. So engineers could simply ignore many linting warnings.</p>
+						<p>You can put in the last resort, of making sure that people cannot deploy code without passing accessibility tests and or linters.</p>
+						<p>You can chain accessibility linter to the same test command you use before committing, pushing locally, and during build to deploy.</p>
+						<p>If the tests fail, then the engineers won't be able to push code or run a successful build and deploy that code to production.</p>
+						<p>Let the bots tell people off… rather than your team mates.</p>
+					</aside>
+				</section>
+
+				<section>
+					<h2>React told me off</h2>
+					<p>
+						...but not all the time
+					</p>
+
+					<aside class="notes">
+						<p>As you can see, React, React Testing Library, and other accessibility linting tools are trying to improve accessibility in several ways:</p>
+						<ol>
+							<li><p>It tries to change the way you approach writing tests. To think more along the lines of what users do on the page, and querying accessible names or roles to check if something works as expected</p></li>
+							<li><p>It tries to embed basic accessibility as a part of the development process or deployment pipeline</p></li>
+							<li><p>It tries to nudge you to add important things like alt tags to images, and accessible names in links and buttons.</p></li>
+						</ol>
+						<p>It will tell me off, if my element doesn't have an accessible name. But robots don't understand what the 'most usable' accessible name looks like. </p>
+						<p>If I wasn't an UX conscious engineer, I may have fixed the issue by putting a random text in as an element's accessible name and calling it the day.</p>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Bots don't know UX</h2>
+					<p>
+						Good HTML &amp; copy...<br>We need humans for that
+					</p>
+
+					<aside class="notes">
+						<p>People can't properly address low-hanging issues raised by tooling, without understanding why that was considered an issue.</p>
+						<p>They need to understand HTML, yes, but also how copy design fits into the whole experience.</p>
+						<p>Copy is a core part of good UX. It's crucial for assistive technologies.</p>
+						<p>And as of now, bots hasn't gotten smart enough, to be the judge of what a good copy looks like yet.</p>
+						<p>It can't tell if your tab order is all messed up either.</p>
+						<hr>
+						<p>Another problem, is that new team members who weren't involved in the automated tests and linting tool setup, <br>may incorrectly assume that's it. You're accessible if all tests passed.</p>
+						<p>Team needs to create an embeded culture of making things accessible in all part of the process, from research, to design, to criteria writing, to testing to prevent that misunderstanding.</p>
+						<p>So yes, React could tell me off for writing some inaccessible code.</p>
+						<p>But we still have to rely on human coders, testers, and designers to figure out what makes sense for our UI.</p>
+					</aside>
+				</section>
+
+				<section>
+					<blockquote>
+						Accessibility is a mindset,<br>not a standalone activity
+					</blockquote>
+					<p class="small-text">
+						<a rel="external" href="https://twitter.com/PraeSongprasit" alt="Link to Prae Songprasit's twitter">@PraeSongprasit</a> and 
+						<a rel="external" href="https://twitter.com/PraeSongprasit" alt="Web Access Club podcast twitter">@WebAccessClub</a>
+					</p>
+
+					<aside class="notes">
+						<p>It's important to remember that accessibility isn't a standalone thing that you can test in isolation.</p>
+						<p>It's a mindset of creating a usable experience for everyone.</p>
+						<p>It still needs humans to work together to create something truly inclusive.</p>
+					</aside>
 				</section>
 			</main>
 		</div>
@@ -165,8 +397,20 @@
 			// - https://revealjs.com/initialization/
 			// - https://revealjs.com/config/
 			Reveal.initialize({
+				// Display presentation control arrows
+				// controls: false,
+				slideNumber: true,
+				showSlideNumber: print,
+				// 16:9 aspect ratio is good for recording and Youtube uploads
+				// 1440p 2560x1440
+				// 1080p 1920x1080
+				// 720p 1280x720
+				// width: 1280,
+				// height: 720,
 				hash: true,
 				transition: 'none',
+				// Enable for PDF export
+				// showNotes: true,
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
 			});
