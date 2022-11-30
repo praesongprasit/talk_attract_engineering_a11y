@@ -14,7 +14,7 @@ In this talk, I will share ways we can empower engineers to be more energised ab
 ## Viewing
 
 The slides can be viewed on:
-praesongprasit.github.io/talk_attract_engineering_a11y/
+https://praesongprasit.github.io/talk_attract_engineering_a11y/
 
 To view slide notes, open the slide and press the `s` key.
 
